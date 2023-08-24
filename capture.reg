@@ -1,0 +1,16 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\capture]
+@="URL:Capture Protocol"
+"URL Protocol"=""
+
+[HKEY_CLASSES_ROOT\capture\shell]
+
+[HKEY_CLASSES_ROOT\capture\shell\open]
+
+[HKEY_CLASSES_ROOT\capture\shell\open\command]
+@="\"C:\\Program Files\\Wireshark\\wireshark_wrapper.exe\" %1"
+
+
+
+

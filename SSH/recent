@@ -1,4 +1,4 @@
-# Recent settings file for Wireshark 4.0.7.
+# Recent settings file for Wireshark 4.0.8.
 #
 # This file is regenerated each time Wireshark is quit
 # and when changing configuration profile.
@@ -75,7 +75,7 @@ gui.allow_hover_selection: TRUE
 
 # Main window upper (or leftmost) pane size.
 # Decimal number.
-gui.geometry_main_upper_pane: 226
+gui.geometry_main_upper_pane: 456
 
 # Main window middle pane size.
 # Decimal number.

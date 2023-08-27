@@ -31,7 +31,7 @@
 
 # Directory to start in when opening File Open dialog.
 # A path to a directory
-#gui.fileopen.dir: C:\Users\Matus\Documents
+#gui.fileopen.dir: %USERPROFILE%\Documents
 
 # The preview timeout in the File Open dialog
 # A decimal number
@@ -470,7 +470,7 @@ extcap.sshdump_exe.remoteusername: root
 
 # Path to SSH private key
 # A string
-extcap.sshdump_exe.sshkey: C:/Users/Matus/.ssh/id_rsa
+extcap.sshdump_exe.sshkey: %USERPROFILE%\.ssh\id_rsa
 
 # SSH key passphrase
 # Password (never stored on disk)
@@ -482,7 +482,7 @@ extcap.sshdump_exe.sshkey: C:/Users/Matus/.ssh/id_rsa
 
 # Remote interface
 # A string
-extcap.sshdump_exe.remoteinterface: vunl4_0
+extcap.sshdump_exe.remoteinterface: vunl23_0
 
 # Remote capture command selection
 # A string

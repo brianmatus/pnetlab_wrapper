@@ -18,7 +18,7 @@ The capture of wireshark of a little more complicated. In a nutshell, because of
 
 
 ### Installation
-1. If not already, create a ssh key pair in default location (%USERPROFILE%/.ssh). Copy your public key to  *./.shh/authorized_keys* in the pnet virtual machine.
+1. If not already, create a ssh key pair in default location (**%USERPROFILE%\\.ssh**). Copy your public key (content of **.ssh\id_rsa.pub**) to  *./.shh/authorized_keys* in the pnet virtual machine.
 
 ```
 echo "<public key>" >> $HOME/.ssh/authorized_keys

@@ -53,7 +53,8 @@ int handleCaptureProtocol(std::string input) {
     }
     outputFile.close();
 
-    const char* cmdCommand = R"("C:\Program Files\Wireshark\Wireshark.exe" -C SSH -i sshdump.exe -k)";
+    const char* cmdCommand = R"(powershell -window hidden -command "&\"C:\Program Files\Wireshark\Wireshark.exe\" -C SSH -i sshdump.exe -k")";
+    //std::cout << cmdCommand << std::endl;
     return system(cmdCommand);
 }
 
@@ -63,8 +64,8 @@ int handleVNCProtocol(std::string input) {
     if (input.back() == '/') {
         input.pop_back();
     }
-    std::string cmdCommand = R"("C:\Program Files\uvnc bvba\UltraVNC\vncviewer.exe" )" + input;
-    std::cout << cmdCommand << std::endl;
+    std::string cmdCommand = R"(powershell -window hidden -command "&\"C:\Program Files\uvnc bvba\UltraVNC\vncviewer.exe\" )" + input + "\"";
+    //std::cout << cmdCommand << std::endl;
     return system(cmdCommand.c_str());
 }
 

@@ -53,6 +53,7 @@ int handleCaptureProtocol(std::string input) {
     }
     outputFile.close();
 
+    //const char* cmdCommand = R"(powershell -window hidden -command "&\"C:\Program Files\Wireshark\Wireshark.exe\" -C SSH -i sshdump.exe -k -platform windows:darkmode=2")";
     const char* cmdCommand = R"(powershell -window hidden -command "&\"C:\Program Files\Wireshark\Wireshark.exe\" -C SSH -i sshdump.exe -k")";
     //std::cout << cmdCommand << std::endl;
     return system(cmdCommand);

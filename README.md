@@ -2,7 +2,7 @@
 # PNETLab Protocol Handler
 Connects PNET's _vnc_, _capture_ and _telnet_ handlers to respective programs
 <br>
-The regex files register an associated keyword (protocol) to do a certain action when opened from the windows explorer (or any browser). The **capture.reg** and **vnc.reg** redirect the url to the **pnet_wrapper.exe** app to parse the correct format for it's corresponding app. The **telnet.reg** redirects the url directly to telnet, as it's already capable of handling the full url string.
+The .reg files register an associated keyword (protocol) to do a certain action when opened from the windows explorer (or any browser). The **capture.reg** and **vnc.reg** redirect the url to the **pnet_wrapper.exe** app to parse the correct format for it's corresponding app. The **telnet.reg** redirects the url directly to telnet, as it's already capable of handling the full url string.
 
 <br>
 The capture of wireshark of a little more complicated. In a nutshell, because of the ssh tunneling, it can't directly set the interface and host for the connection via cli parameters. So it edits a profile-file of wireshark and replaces certain lines containing the config of the host and interface. And it then launches wireshark using the ssh-dump.exe interface and given ip.

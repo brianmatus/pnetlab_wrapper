@@ -9,4 +9,4 @@ Windows Registry Editor Version 5.00
 [HKEY_CLASSES_ROOT\telnet\shell\open]
 
 [HKEY_CLASSES_ROOT\telnet\shell\open\command]
-@="\"C:\\Program Files\\putty\\putty.exe\" %1"
+@="\"C:\\Program Files\\pnet-wrapper\\pnet_wrapper.exe\" %1"

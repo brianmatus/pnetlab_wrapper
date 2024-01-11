@@ -6,7 +6,7 @@
 
 const char* appDataPath = std::getenv("APPDATA");
 
-std::string filepath = std::string (appDataPath) + R"(\Wireshark\profiles\SSH\preferences)";
+std::string wiresharkProfilePath = std::string (appDataPath) + R"(\Wireshark\profiles\SSH\preferences)";
 int prefs_host_line = 457;
 int prefs_interface = 485;
 
@@ -24,9 +24,9 @@ int handleCaptureProtocol(std::string input) {
     std::string host = input.substr(0, slashPosition);
     std::string interface = input.substr(slashPosition + 1);
 
-    std::fstream theFile(filepath);
+    std::fstream theFile(wiresharkProfilePath);
     if (!theFile) {
-        std::cerr << "Error opening file: " << filepath << std::endl;
+        std::cerr << "Error opening file: " << wiresharkProfilePath << std::endl;
         sleep(2);
         return 1;
     }
@@ -41,9 +41,9 @@ int handleCaptureProtocol(std::string input) {
     lines[prefs_host_line - 1] = "extcap.sshdump_exe.remotehost: " + host;
     lines[prefs_interface - 1] = "extcap.sshdump_exe.remoteinterface: " + interface;
 
-    std::ofstream outputFile(filepath);
+    std::ofstream outputFile(wiresharkProfilePath);
     if (!outputFile) {
-        std::cerr << "Error opening file for writing: " << filepath << std::endl;
+        std::cerr << "Error opening file for writing: " << wiresharkProfilePath << std::endl;
         sleep(2);
         return 1;
     }
@@ -53,8 +53,8 @@ int handleCaptureProtocol(std::string input) {
     }
     outputFile.close();
 
-    //const char* cmdCommand = R"(powershell -window hidden -command "&\"C:\Program Files\Wireshark\Wireshark.exe\" -C SSH -i sshdump.exe -k -platform windows:darkmode=2")";
-    const char* cmdCommand = R"(powershell -window hidden -command "&\"C:\Program Files\Wireshark\Wireshark.exe\" -C SSH -i sshdump.exe -k")";
+    const char* cmdCommand = R"(powershell -window hidden -command "&\"C:\Program Files\Wireshark\Wireshark.exe\" -C SSH -i sshdump.exe -k -platform windows:darkmode=2")";
+    //const char* cmdCommand = R"(powershell -window hidden -command "&\"C:\Program Files\Wireshark\Wireshark.exe\" -C SSH -i sshdump.exe -k")";
     //std::cout << cmdCommand << std::endl;
     return system(cmdCommand);
 }
@@ -70,6 +70,16 @@ int handleVNCProtocol(std::string input) {
     return system(cmdCommand.c_str());
 }
 
+int handleTelnetProtocol(const std::string& input) {
+    std::cout << input << std::endl;
+    
+    std::string cmdCommand = R"(powershell -command "&\"C:\Program Files (x86)\NetSarang\Xshell 7\Xshell.exe\" -url )" + input + "\"";
+    std::cout << cmdCommand << std::endl;
+    return system(cmdCommand.c_str());
+}
+
+
+
 int main(int argc, char* argv[]) {
     if (argc < 2) {
         std::cout << "Insufficient arguments..." << std::endl;
@@ -84,7 +94,13 @@ int main(int argc, char* argv[]) {
         return handleVNCProtocol(input);
     }
 
-    std::cerr << "Invalid url handler. It should be in ['capture','vnc']" << std::endl;
+    if (input.find("telnet://") != std::string::npos) {
+        std::cout << "Telnet handling" << std::endl;
+        
+        return handleTelnetProtocol(input);
+    }
+
+    std::cerr << "Invalid url handler. It should be in ['capture', 'vnc', 'telnet']" << std::endl;
     sleep(3);
     return 1;
 }

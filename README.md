@@ -39,4 +39,8 @@ echo "<public key>" >> $HOME/.ssh/authorized_keys
 
 ## Extras
 
-Para mejorar aún mas la experiencia, se puede remover el mensaje de "Estas seguro que deseas ejecutar esta aplicacion?". La guía para esto se encuentra por separado en [Config-popup.md](Config-popup.md) ya que es un poco extenso. La opción de "recordar mi selección" está disponible solo para sitios HTTPs. Por lo que configurar esta comodidad involucra crear un certificado auto firmado, instalarlo en Windows, y habilitar esta opción oculta de Google chrome (probado en Version 120.0.6099.216). Para otros navegadores esto puede variar un poco y puede no ser necesario, hacer pruebas previamente.
+Para mejorar aún mas la experiencia, se puede remover el mensaje de "Estas seguro que deseas ejecutar esta aplicacion?".
+
+![readme_protocol-prompt](readme_img/readme_protocol-prompt.png)
+
+La guía para esto se encuentra por separado en [Config-popup.md](Config-popup.md) ya que es un poco extenso. La opción de "recordar mi selección" está disponible solo para sitios HTTPs. Por lo que configurar esta comodidad involucra crear un certificado auto firmado, instalarlo en Windows, y habilitar esta opción oculta de Google chrome (probado en Version 120.0.6099.216). Para otros navegadores esto puede variar un poco y puede no ser necesario, hacer pruebas previamente.

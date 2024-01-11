@@ -1,33 +1,42 @@
 
 # PNETLab Protocol Handler
-Connects PNET's _vnc_, _capture_ and _telnet_ handlers to respective programs
-<br>
-The .reg files register an associated keyword (protocol) to do a certain action when opened from the windows explorer (or any browser). The **capture.reg** and **vnc.reg** redirect the url to the **pnet_wrapper.exe** app to parse the correct format for it's corresponding app. The **telnet.reg** redirects the url directly to telnet, as it's already capable of handling the full url string.
+Conecta PNET con los protocolos _vnc_, _capture_ y _telnet_ para ser manejados por programas personalizados.
 
 <br>
-The capture of wireshark of a little more complicated. In a nutshell, because of the ssh tunneling, it can't directly set the interface and host for the connection via cli parameters. So it edits a profile-file of wireshark and replaces certain lines containing the config of the host and interface. And it then launches wireshark using the ssh-dump.exe interface and given ip.
+
+Los archivos .reg registran y asocian keywords a protocolos para ejecutar cierto programa cuando son invocados por el explorador de windows (o cualquier otro navegador/app). Los archivos **capture.reg**, **vnc.reg** y **telnet.reg** registran cada uno el respectivo protocolo, y los tres asocian la ejecución de **pnet_wrapper.exe**, dándole como argumento el respectivo URL generado por PNET Lab para ser parsado y redirigido a la app correspondiente con el formato respectivo.
 
 
+<br>
+
+Para la captura de wireshark, no es tan simple. Como realmente no es una captura directa si no una vía ssh, pasar argumentos no es suficiente. En resumen, se debe crear inicialmente un perfil el cual incluye configuración inicial para el módulo ssh-dump. Este perfil contiene credenciales de ssh, el host y la interfaz virtual a capturar (dentro de la VM). Luego, ya se puede lanzar wireshark especificando que se debe utilizar ssh-dump.exe y el host dado.
 
 
-### Pre-requirements
-- [OpenSSH](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=gui#install-openssh-for-windows) (for ssh-keygen to log in via wireshark. Only client is necessary, available via windows features)
-- [Wireshark](https://www.wireshark.org/download.html) (for capturing network traffic)
-- [PuTTY](https://www.putty.org/) (For telnet/ssh sessions)
-- [UltraVNC](https://uvnc.com/downloads/ultravnc.html) (for vnc into linux machines)
+### Prerequisitos
+- [OpenSSH](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=gui#install-openssh-for-windows) (para ejecutar ssh-keygen para iniciar sesión vía wireshark. Solo el cliente es necesario, disponible vía features de Windows)
+- [Wireshark](https://www.wireshark.org/download.html) (para capturar tráfico de red)
+- [Xshell](https://www.netsarang.com/en/free-for-home-school/) (para sesiones telnet/ssh, versión educación gratis)
+- [UltraVNC](https://uvnc.com/downloads/ultravnc.html) (para vnc en máquinas linux)
 
 
-### Installation
-1. If not already, create a ssh key pair in default location (**%USERPROFILE%\\.ssh**). Copy your public key (content of **.ssh\id_rsa.pub**) to  *./.shh/authorized_keys* in the pnet virtual machine.
+### Instalación
+
+1. **Solamente si NO** están creadas, crea un par de llaves ssh en la ubicación default (**%USERPROFILE%\\.ssh**)
+2. Copia el contenido de la llave publica (**.ssh\id_rsa.pub**) a *./.ssh/authorized_keys* dentro de la VM de PNET
 
 ```
 echo "<public key>" >> $HOME/.ssh/authorized_keys
 ```
 
-2. Register respective _protocol handlers_ in windows registry. You can double click every .reg to add it to the registry.  **ALWAYS READ ANY .reg FILE BEFORE ADDING IT TO YOUR PC.**  
+2. Registra cada uno de los _protocol handlers_ respectivos en windows registry(**regedit**). Puedes hacer doble click en cada uno para agregarlo al registro.  **SIEMPRE LEE CADA ARCHIVO .reg DESCARGADO DE INTERNET ANTES DE AGREGARLO A TU PC, PUEDE CONTENER CODIGO MALICIOSO**  
 
-3. Copy the folder SSH into **%appdata%\Wireshark\profiles**
+3. Copia el folder **SSH** en **%appdata%\Wireshark\profiles** (no solamente el contenido, si no toda la carpeta SSH)
    
-5. Copy the folder **pnet-wrapper** into **C:\\Program Files\\** (If you want another location, modify the .reg files accordingly)
+4. Copia el folder **pnet-wrapper** en **C:\\Program Files\\** (Si quieres otra ubicación, debes modificar los archivos .reg para apuntar a esa dirección)
 
-## Be sure to disable html console. Now, selecting elements will trigger according apps in the host computer.
+## Asegúrate de deshabilitar la consola html cuando estes en el navegador de PNET. Ahora seleccionar items activará las apps correspondientes.
+
+
+## Extras
+
+Para mejorar aún mas la experiencia, se puede remover el mensaje de "Estas seguro que deseas ejecutar esta aplicacion?". La guía para esto se encuentra por separado en [Config-popup.md](Config-popup.md) ya que es un poco extenso. La opción de "recordar mi selección" está disponible solo para sitios HTTPs. Por lo que configurar esta comodidad involucra crear un certificado auto firmado, instalarlo en Windows, y habilitar esta opción oculta de Google chrome (probado en Version 120.0.6099.216). Para otros navegadores esto puede variar un poco y puede no ser necesario, hacer pruebas previamente.

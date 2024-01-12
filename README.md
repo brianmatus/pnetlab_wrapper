@@ -21,8 +21,17 @@ Para la captura de wireshark, no es tan simple. Como realmente no es una captura
 
 ### Instalación
 
-1. **Solamente si NO** están creadas, crea un par de llaves ssh en la ubicación default (**%USERPROFILE%\\.ssh**)
-2. Copia el contenido de la llave publica (**.ssh\id_rsa.pub**) a *./.ssh/authorized_keys* dentro de la VM de PNET
+**Solamente si NO** están creadas, crea un par de llaves ssh en la ubicación default (**%USERPROFILE%\\.ssh**). Si tiene o deseas agregarle un passphrase, antes del paso 3 debes editar SSH\preferences. Descomentar linea 477 y colocarl el passphrase aca. (No he probado si al no especificarlo wireshark la solicita o no). <br><br>
+
+Si no deseas un passphrase no es necesario editar este archivo.
+
+     # opción 1: ed25519
+     ssh-keygen -t ed25519
+
+     # opción 2: RSA 4096
+     ssh-keygen -t rsa -b 4096
+    
+1. Copia el contenido de la llave publica (**.ssh\id_rsa.pub** o **.ssh\id_ed25519.pub**) a *./.ssh/authorized_keys* dentro de la VM de PNET
 
 ```
 echo "<public key>" >> $HOME/.ssh/authorized_keys

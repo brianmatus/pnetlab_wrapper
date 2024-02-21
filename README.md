@@ -21,7 +21,7 @@ Para la captura de wireshark, no es tan simple. Como realmente no es una captura
 
 ### Instalación
 
-**Solamente si NO** están creadas, crea un par de llaves ssh en la ubicación default (**%USERPROFILE%\\.ssh**). Si tiene o deseas agregarle un passphrase, antes del paso 3 debes editar SSH\preferences. Descomentar linea 477 y colocarl el passphrase aca. (No he probado si al no especificarlo wireshark la solicita o no). <br><br>
+**Solamente si NO** están creadas, crea un par de llaves ssh en la ubicación default (**%USERPROFILE%\\.ssh**). Si tiene o deseas agregarle un passphrase, antes del paso 3 debes editar SSH\preferences. Descomentar linea 477 y colocar el passphrase aca. (No he probado si al no especificarlo wireshark la solicita o no). <br><br>
 
 Si no deseas un passphrase no es necesario editar este archivo.
 
